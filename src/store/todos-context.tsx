@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 // import Todo from "../models/todo";
 
 
-type Todo = {id: string, title: string}
+type Todo = {id: string, title: string, tabs: {id: string, item: string}[]}
 
 type TodoContextObj = {
     items: Todo[];
@@ -16,7 +16,7 @@ type TodoContextObj = {
     onSetEditableId: (id: string) => void;
     knowledgeTitle: string | null,
     setKnowledgeTitle: (text: string) => void;
-    // addTabs: (text: string) => void;
+    addTabs: (id: string, text: string) => void;
 }
 
 export const TodosContext = React.createContext<TodoContextObj>({
@@ -31,7 +31,7 @@ export const TodosContext = React.createContext<TodoContextObj>({
     onSetEditableId: () => {},
     knowledgeTitle: "",
     setKnowledgeTitle: (text: string) => {},
-    // addTabs: (text: string) => {},
+    addTabs: (id: string, text: string) => {},
 });
 
 type Props = { children: React.ReactNode }
@@ -45,6 +45,7 @@ const TodosContextProvider: React.FC<Props> = (props) => {
     const editModehandler = () => {
        setisEditMode(!isEditMode)
     }
+    
 
     const fetchNotes = async () => {
       const response = await fetch('https://react-ctx-redux-ts-notes-default-rtdb.europe-west1.firebasedatabase.app/notes.json');
@@ -55,20 +56,32 @@ const TodosContextProvider: React.FC<Props> = (props) => {
       const data = await response.json();
       // console.log(data);
 
-      const transformedData: { id: string; title: string; }[] = [];
+      const transformedData: { id: string; title: string; tabs: {id: string, item: string}[] }[] = [];
+      
 
      for(const key in data) {
+
+      const transformedTabs: {id: string, item: string}[] = [];
+
+      for(const el in data[key].items) {
+        const tabsObject = {
+          id: el,
+          item: data[key].items[el].itemName
+        }
+
+        transformedTabs.push(tabsObject)
+      }
+
          const contentObj = {
              id: key,
-             title: data[key].title
+             title: data[key].title,
+             tabs: transformedTabs
          }
 
          transformedData.push(contentObj);
      }
 
-     setTodos(transformedData)
-
-    //  console.log("from-Fetch:", todos);
+     setTodos(transformedData);
       
     }
 
@@ -78,7 +91,10 @@ const TodosContextProvider: React.FC<Props> = (props) => {
         fetchNotes();
       } catch (error) {
         console.log(error)
+      } finally {
+        // setEditableId(todos[0]?.id)
       }
+
     }, [])
 
     const deleteNotesItem = (id: string) => {
@@ -110,9 +126,9 @@ const TodosContextProvider: React.FC<Props> = (props) => {
     
 
     function addTodo(text: string) {
-      const newTodo =  {title: text}
+      const newTodo =  {title: text, }
       // setTodos([...todos, newTodo]);
-      fetch('https://react-ctx-redux-ts-notes-default-rtdb.europe-west1.firebasedatabase.app/notes.json', {
+      fetch(`https://react-ctx-redux-ts-notes-default-rtdb.europe-west1.firebasedatabase.app/notes.json`, {
         method: 'POST',
         body: JSON.stringify(newTodo),
         headers: {'ContentType': 'aplication/json'}
@@ -125,18 +141,13 @@ const TodosContextProvider: React.FC<Props> = (props) => {
     // 
 
     const addTabs = async (id: string, text: string) => {
-      let tabs = []
-      const newTabs: string[] = []
-      tabs.push(text)
-      const response = await fetch(`https://react-ctx-redux-ts-notes-default-rtdb.europe-west1.firebasedatabase.app/notes/${id}.json/tabs`, {
-        method: 'PUT',
-        body: JSON.stringify({tabs: newTabs}),
+      fetch(`https://react-ctx-redux-ts-notes-default-rtdb.europe-west1.firebasedatabase.app/notes/${id}/items.json`, {
+        method: 'POST',
+        body: JSON.stringify({itemName: text}),
         headers: {'ContentType': 'aplication/json'}
-      })
-      if(!response.ok) {
-        throw new Error('Something went wrong!')
-      }
-      fetchNotes()      
+      }).then(() => {
+        fetchNotes();
+      })     
   }
   
     const deleteItemHandler = (id: string) => {
@@ -147,7 +158,7 @@ const TodosContextProvider: React.FC<Props> = (props) => {
 
     const updateTodo = async (id: string, text: string) => {
         const response = await fetch(`https://react-ctx-redux-ts-notes-default-rtdb.europe-west1.firebasedatabase.app/notes/${id}.json`, {
-          method: 'PUt',
+          method: 'PUT',
           body: JSON.stringify({title: text}),
           headers: {'ContentType': 'aplication/json'}
         })
@@ -173,6 +184,7 @@ const TodosContextProvider: React.FC<Props> = (props) => {
         onSetEditableId: setEditableId,
         knowledgeTitle,
         setKnowledgeTitle,
+        addTabs,
     }
 
    return <TodosContext.Provider value={contextValue}>{props.children}</TodosContext.Provider>

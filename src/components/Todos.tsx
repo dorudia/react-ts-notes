@@ -6,6 +6,14 @@ import classes from './Todos.module.css'
 
 const Todos: React.FC = (props) => {
   const todosCtx = useContext(TodosContext);
+
+  const activeId = todosCtx.editableItemId;
+
+  useEffect(()=> {
+    todosCtx.onSetEditableId(todosCtx.items[0]?.id)
+  },[todosCtx.items])
+  
+  
   
   return (
     <ul className={classes.todos}>

@@ -20,6 +20,7 @@ const TodoItem: React.FC<{id: string, title: string}> = (props) => {
 
     const clickHandler = () => {
         todosCtx.setKnowledgeTitle(props.title)
+        todosCtx.onSetEditableId(props.id)
     }
 
     return (

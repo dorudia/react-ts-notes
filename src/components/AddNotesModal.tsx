@@ -1,9 +1,13 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import Modal from '../layers/Modal'
 import classes from './EditTodoForm.module.css'
+import { TodosContext } from '../store/todos-context';
+
 
 const AddNotesModal = () => {
   const [inputValue, setinputValue] = useState('')
+
+  const notesCtx = useContext(TodosContext);
 
   const onChangeHandler = (e: any) => {
     setinputValue(e.target.value)
@@ -11,7 +15,9 @@ const AddNotesModal = () => {
 
   const onSubmitHandler = (e: React.FormEvent) => {
      e.preventDefault();
-     console.log('submit note!!!', inputValue);
+     console.log('submit note!!!', inputValue, notesCtx.editableItemId);
+     notesCtx.addTabs(notesCtx.editableItemId, inputValue)
+     
 
      setinputValue('');
   }
