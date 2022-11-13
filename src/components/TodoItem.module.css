@@ -1,0 +1,30 @@
+.item {
+    margin: 1rem 0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    padding: .5rem;
+    background-color: #f7f5ef;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .deleteItem {
+    width: 20px;
+    height: 20px;
+    background-image: url('../../public/assets/delete-button-svgrepo-com.svg');
+    background-size: cover;
+    cursor: pointer;
+    margin-left: .5rem;
+  }
+
+  .editItem {
+    width: 20px;
+    height: 20px;
+    background-image: url('../../public/assets/pencil-edit-button-svgrepo-com.svg');
+    background-size: cover;
+    cursor: pointer;
+  }
+
+  .icons {
+    display: flex;
+  }

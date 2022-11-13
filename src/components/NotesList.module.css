@@ -1,0 +1,48 @@
+.notesListContainer  h2 {
+  text-align: center;
+  background: rgb(77, 80, 73);
+  color: white;
+  padding: 10px 0;
+  position: relative;
+}
+
+.notesListContainer h2 span {
+  line-height: 1;
+  /* width: 26px;
+  height: 26px; */
+  padding: 3px 9px;
+  border: 1px solid white;
+  position: absolute;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 18px;
+  border-radius: 4px;
+}
+
+.notesListContainer h2 span:hover {
+ background: wheat;
+ color: black;
+ font-weight: 700;
+}
+
+.notesListContainer ul {
+  /* padding: 30px 60px; */
+  display: flex;
+  list-style: none;
+}
+
+.notesListContainer ul li {
+  border: 1px solid rgb(178, 178, 178);
+  padding: 2px 6px;
+
+}
+
+.notesListContainer ul li:not(:first-of-type) {
+  border-left: none;
+}
