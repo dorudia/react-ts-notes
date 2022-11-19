@@ -17,14 +17,14 @@ const EditTodoForm: React.FC = (props) => {
     const submitHandler = (event: React.FormEvent) => {
         event.preventDefault();
         todosCtx.updateTodo(todosCtx.editableItemId, inputValue);
-        todosCtx.editModehandler();
+        todosCtx.isModalOpenHandler(false);
 
     }
 
     return (
         <Modal>
             <form onSubmit={submitHandler}  className={classes.form}>
-                <label htmlFor="todo">{"Edid Knowledge"}</label>
+                <label htmlFor="todo">{"Edit Knowledge"}</label>
                 <input value={inputValue} onChange={onChangeHandler} id='todo' type='text'/>
                 <button>Save</button>
             </form>

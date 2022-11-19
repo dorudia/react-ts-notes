@@ -41,7 +41,7 @@ const App: React.FC = () => {
           </div> 
         </div>
       </ContentLayer>
-      {todosCtx.editMode && <EditTodoForm/>}
+      {todosCtx.isModalOpen && <EditTodoForm/>}
     </>
   );
 }

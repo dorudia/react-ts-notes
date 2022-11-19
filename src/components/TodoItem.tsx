@@ -12,7 +12,7 @@ const TodoItem: React.FC<{id: string, title: string}> = (props) => {
     }
 
     const onEditItem = () => {
-        todosCtx.editModehandler()
+        todosCtx.isModalOpenHandler(true)
         // todosCtx.editableItemId = props.id;
         // console.log(todosCtx.editableItemId);
         todosCtx.onSetEditableId(props.id)

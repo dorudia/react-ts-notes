@@ -6,12 +6,12 @@ type Todo = {id: string, title: string, tabs: {id: string, item: string}[]}
 
 type TodoContextObj = {
     items: Todo[];
-    editMode: boolean;
+    isModalOpen: boolean;
     getTodos: () => void;
     addTodo: (text: string) => void;
     removeTodo: (id: string) => void;
     updateTodo: (id: string, text: string) => void;
-    editModehandler: () => void;
+    isModalOpenHandler: (text: boolean) => void;
     editableItemId: string;
     onSetEditableId: (id: string) => void;
     knowledgeTitle: string | null,
@@ -21,12 +21,12 @@ type TodoContextObj = {
 
 export const TodosContext = React.createContext<TodoContextObj>({
     items: [],
-    editMode: false,
+    isModalOpen: false,
     getTodos: () => {},
     addTodo: (text: string) => {},
     removeTodo: (id: string) => {},
     updateTodo: (id: string, text: string) => {},
-    editModehandler: () => {},
+    isModalOpenHandler: (text: boolean) => {},
     editableItemId: "",
     onSetEditableId: () => {},
     knowledgeTitle: "",
@@ -38,12 +38,12 @@ type Props = { children: React.ReactNode }
 
 const TodosContextProvider: React.FC<Props> = (props) => {
     const [todos, setTodos] = useState<Todo[]>([]);
-    const [isEditMode, setisEditMode] = useState(false);
+    const [isModalOpen, setisModalOpen] = useState(false);
     const [editableItemId, seteditableItemId] = useState('')
     const [knowledgeTitle, setKnowledgeTitle] = useState("CSS")
 
-    const editModehandler = () => {
-       setisEditMode(!isEditMode)
+    const isModalOpenHandler = (text: boolean) => {
+      setisModalOpen(text)
     }
     
 
@@ -174,12 +174,12 @@ const TodosContextProvider: React.FC<Props> = (props) => {
 
     const contextValue: TodoContextObj= {
         items: todos,
-        editMode: isEditMode,
+        isModalOpen: isModalOpen,
         getTodos: fetchNotes,
         addTodo: addTodo,
         removeTodo: deleteItemHandler,
         updateTodo: updateTodo,
-        editModehandler: editModehandler,
+        isModalOpenHandler,
         editableItemId: editableItemId,
         onSetEditableId: setEditableId,
         knowledgeTitle,

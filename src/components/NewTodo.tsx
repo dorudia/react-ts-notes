@@ -19,14 +19,14 @@ const NewTodo: React.FC = (props) => {
         return;
      }
 
-     if(!todosCtx.editMode) {
+     if(!todosCtx.isModalOpen) {
       todosCtx.addTodo(inputValue)
       setInputValue('')
      }
 
     
 
-     if(todosCtx.editMode) {
+     if(todosCtx.isModalOpen) {
       console.log('Is Editable!!!');
      }
   }
@@ -43,7 +43,7 @@ const NewTodo: React.FC = (props) => {
 
   let editableTitle;
 
-  if(todosCtx.editMode) {
+  if(todosCtx.isModalOpen) {
     editableTitle = todosCtx.items.filter(el => el.id === todosCtx.editableItemId)[0].title
 
     console.log(editableTitle);
