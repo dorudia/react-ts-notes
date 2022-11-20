@@ -3,7 +3,7 @@ import { TodosContext } from '../store/todos-context'
 import { useContext, useState } from 'react'
 import Modal from '../layers/Modal'
 
-const TodoItem: React.FC<{id: string, title: string}> = (props) => {
+const TodoItem = (props) => {
     const todosCtx = useContext(TodosContext)
 
 
@@ -13,10 +13,13 @@ const TodoItem: React.FC<{id: string, title: string}> = (props) => {
 
     const onEditItem = () => {
         todosCtx.isModalOpenHandler(true)
-        // todosCtx.editableItemId = props.id;
-        // console.log(todosCtx.editableItemId);
+        todosCtx.editableItemId = props.id;
+        console.log(todosCtx.editableItemId);
         todosCtx.onSetEditableId(props.id)
+        props.setShowEditTodoModal();
+        
     }
+    
 
     const clickHandler = () => {
         todosCtx.setKnowledgeTitle(props.title)

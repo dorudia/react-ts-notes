@@ -4,25 +4,26 @@ import { TodosContext } from '../store/todos-context';
 import Modal from '../layers/Modal';
 
 
-const EditTodoForm: React.FC = (props) => {
+const EditTodoForm = (props) => {
     const todosCtx = useContext(TodosContext);
     const editableText = todosCtx.items.find(el => el.id === todosCtx.editableItemId)?.title;
-    const [inputValue, setInputValue] = useState<any>(editableText);
+    const [inputValue, setInputValue] = useState(editableText);
 
-    const onChangeHandler = (e: any) => {
+    const onChangeHandler = (e) => {
       setInputValue(e.target.value)
     }
 
 
-    const submitHandler = (event: React.FormEvent) => {
+    const submitHandler = (event) => {
         event.preventDefault();
         todosCtx.updateTodo(todosCtx.editableItemId, inputValue);
         todosCtx.isModalOpenHandler(false);
+        props.setEditTodoModal();
 
     }
 
     return (
-        <Modal>
+        <Modal showEditTodoModal={props.setEditTodoModal}>
             <form onSubmit={submitHandler}  className={classes.form}>
                 <label htmlFor="todo">{"Edit Knowledge"}</label>
                 <input value={inputValue} onChange={onChangeHandler} id='todo' type='text'/>

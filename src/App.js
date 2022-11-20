@@ -1,12 +1,9 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useState} from 'react';
 import NewTodo from './components/NewTodo';
 import Todos from './components/Todos';
-// import Todo from './models/todo';
 import './App.css'
-import TodosContextProvider from './store/todos-context';
 import { TodosContext } from './store/todos-context';
 import ContentLayer from './layers/ContentLayer';
-import Modal from './layers/Modal';
 import EditTodoForm from './components/EditTodoForm';
 import NotesList from './components/NotesList';
 
@@ -15,33 +12,31 @@ import NotesList from './components/NotesList';
 
 
 
-const App: React.FC = () => {
+const App = () => {
+  const [showEditTodoModal, setShowEditTodoModal] = useState(false)
 
-  const todosCtx = useContext(TodosContext);
-  // console.log(todosCtx);
+  // const todosCtx = useContext(TodosContext);
   
-
-  // useEffect(() => {
-  // console.log('changed edit mode');
-  
-  // }, [todosCtx.editMode])
+  const onSetShowEditTodoModal = () => {
+    setShowEditTodoModal(!showEditTodoModal);
+  }
   
 
   return (
     <>
-      <nav>React-Hooks-Context-JS-Redux-Typescript</nav>
+      <nav>CSS-SCSS-JS-React-Hooks-Router-Context-Redux-Typescript...</nav>
       <ContentLayer>
         <div className='grid-container'>
           <div className='left-container'>
             <NewTodo />
-            <Todos />
+            <Todos setEditTodoModal={onSetShowEditTodoModal}/>
           </div>
           <div className="right-container">
              <NotesList/>
           </div> 
         </div>
       </ContentLayer>
-      {todosCtx.isModalOpen && <EditTodoForm/>}
+      {showEditTodoModal && <EditTodoForm setEditTodoModal={onSetShowEditTodoModal}/>}
     </>
   );
 }

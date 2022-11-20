@@ -1,24 +1,34 @@
 import React, {useState, useEffect, useContext, useRef} from 'react'
 import Modal from '../layers/Modal'
-import classes from './EditTodoForm.module.css'
+import classes from './AddNotesModal.module.css'
 import { TodosContext } from '../store/todos-context';
 
 
-const AddNotesModal = () => {
+const AddNotesModal = (props) => {
   const [inputValue, setinputValue] = useState('')
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
-  const [value, setValue] = useState<String>();
+  const [textareaValue, setTextareaValue] = useState()
+  const textareaRef = useRef(null);
 
   const notesCtx = useContext(TodosContext);
 
-  const onChangeHandler = (e: any) => {
+  const onChangeHandler = (e) => {
     setinputValue(e.target.value)
   }
 
-  const onSubmitHandler = (e: React.FormEvent) => {
+  const onSubmitHandler = (e) => {
      e.preventDefault();
      console.log('submit note!!!', inputValue, notesCtx.editableItemId);
-     notesCtx.addTabs(notesCtx.editableItemId, inputValue)
+     notesCtx.addTabs(notesCtx.editableItemId, inputValue, textareaValue);
+     props.showTabModalHandler();
+     if(inputValue.trim().length < 3) {
+      console.log('title to short!');
+      return;
+     }
+
+     if(textareaValue.trim().length < 3) {
+      console.log('title to short!');
+      return;
+     }
      
 
      setinputValue('');
@@ -30,13 +40,13 @@ const AddNotesModal = () => {
       const scrollHeight = textareaRef.current.scrollHeight;
       textareaRef.current.style.height = scrollHeight + "px";
     }
-  }, [value]);
+  }, [textareaValue]);
 
-  const textAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(event.target.value);
+  const textAreaChange = (event) => {
+    setTextareaValue(event.target.value);
   };
 
-  const styles: { [name: string]: React.CSSProperties } = {
+  const styles = {
     container: {
       marginTop: 50,
       display: "flex",
@@ -55,15 +65,16 @@ const AddNotesModal = () => {
   };
 
   return (
-    <Modal>
+    <Modal setShowTabModal={props.showTabModalHandler}>
         <form className={classes.form} onSubmit={onSubmitHandler}>
             <label htmlFor="todo">{"Enter New Note"}</label>
             <input value={inputValue} onChange={onChangeHandler} id='todo' type='text'/>
             <textarea ref={textareaRef}
               style={styles.textareaDefaultStyle}
+              value={textareaValue}
               onChange={textAreaChange}
             >
-               {value}
+               {textareaValue}
            </textarea>
             <button>Add Note</button>
         </form>

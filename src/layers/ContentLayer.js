@@ -1,8 +1,8 @@
 import React from 'react'
 
-type Props = { children: React.ReactNode }
 
-const ContentLayer: React.FC<Props> = (props) => {
+
+const ContentLayer = (props) => {
   return (
     <div className='contentWrapper'>
         {props.children}

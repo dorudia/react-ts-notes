@@ -36,14 +36,21 @@
   display: flex;
   flex-wrap: wrap;
   list-style: none;
+  margin-bottom: 2rem;
 }
 
 .notesListContainer ul li {
   border: 1px solid rgb(178, 178, 178);
-  padding: 2px 6px;
-
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 18px;
 }
 
 .notesListContainer ul li:not(:first-of-type) {
   border-left: none;
+}
+
+.notesListContainer ul li:hover {
+  background-color: blueviolet;
+  color: white;
 }

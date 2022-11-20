@@ -3,7 +3,7 @@ import { useRef, useState } from 'react'
 import classes from './NewTodo.module.css'
 import { TodosContext } from '../store/todos-context'
 
-const NewTodo: React.FC = (props) => {
+const NewTodo = (props) => {
   const [inputValue, setInputValue] = useState('')
   const [editInputValue, setEditInputValue] = useState('')
   
@@ -11,7 +11,7 @@ const NewTodo: React.FC = (props) => {
 
   const todoInputRef = useRef<HTMLInputElement>(null)
 
-  const submitHandler = (e: React.FormEvent) => {
+  const submitHandler = (e) => {
      e.preventDefault();
      
      if(inputValue?.trim().length === 0) {
@@ -31,11 +31,11 @@ const NewTodo: React.FC = (props) => {
      }
   }
 
-  const onChangeHandler = (e: any) => {
+  const onChangeHandler = (e) => {
     setInputValue(e.target.value)
   }
 
-  const onChangeEditHandler = (e: any) => {
+  const onChangeEditHandler = (e) => {
     setEditInputValue(e.target.value)
   }
 

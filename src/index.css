@@ -38,3 +38,25 @@ nav {
   min-height: 400px;
   background: #f7f5ef;
 }
+
+.tab-details {
+  background-color: rgb(221, 221, 221);
+  width: 90%;
+  margin: auto;
+  display: grid;
+  align-items: center;
+  padding: 1rem;
+}
+
+.tab-details h3 {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.tab-details textarea {
+  padding: 1rem;
+  overflow: auto;
+  resize: none;
+  font-size: 18px;
+}
+
