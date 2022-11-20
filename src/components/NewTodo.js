@@ -3,7 +3,7 @@ import { useRef, useState } from 'react'
 import classes from './NewTodo.module.css'
 import { TodosContext } from '../store/todos-context'
 
-const NewTodo: React.FC = (props) => {
+const NewTodo = (props) => {
   const [inputValue, setInputValue] = useState('')
   const [editInputValue, setEditInputValue] = useState('')
   
@@ -11,7 +11,7 @@ const NewTodo: React.FC = (props) => {
 
   const todoInputRef = useRef<HTMLInputElement>(null)
 
-  const submitHandler = (e: React.FormEvent) => {
+  const submitHandler = (e) => {
      e.preventDefault();
      
      if(inputValue?.trim().length === 0) {
@@ -19,23 +19,23 @@ const NewTodo: React.FC = (props) => {
         return;
      }
 
-     if(!todosCtx.editMode) {
+     if(!todosCtx.isModalOpen) {
       todosCtx.addTodo(inputValue)
       setInputValue('')
      }
 
     
 
-     if(todosCtx.editMode) {
+     if(todosCtx.isModalOpen) {
       console.log('Is Editable!!!');
      }
   }
 
-  const onChangeHandler = (e: any) => {
+  const onChangeHandler = (e) => {
     setInputValue(e.target.value)
   }
 
-  const onChangeEditHandler = (e: any) => {
+  const onChangeEditHandler = (e) => {
     setEditInputValue(e.target.value)
   }
 
@@ -43,7 +43,7 @@ const NewTodo: React.FC = (props) => {
 
   let editableTitle;
 
-  if(todosCtx.editMode) {
+  if(todosCtx.isModalOpen) {
     editableTitle = todosCtx.items.filter(el => el.id === todosCtx.editableItemId)[0].title
 
     console.log(editableTitle);
