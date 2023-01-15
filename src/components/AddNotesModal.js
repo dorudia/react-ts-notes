@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext, useRef} from 'react'
 import Modal from '../layers/Modal'
 import classes from './AddNotesModal.module.css'
-import { TodosContext } from '../store/todos-context';
+import { TodosContext } from '../reducer/todos-context';
 
 
 const AddNotesModal = (props) => {

@@ -1,6 +1,6 @@
 
 import React, {useContext, useEffect} from 'react'
-import { TodosContext } from '../store/todos-context'
+import { TodosContext } from '../reducer/todos-context'
 import TodoItem from './TodoItem'
 import classes from './Todos.module.css'
 

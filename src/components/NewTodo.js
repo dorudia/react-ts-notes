@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { useRef, useState } from 'react'
 import classes from './NewTodo.module.css'
-import { TodosContext } from '../store/todos-context'
+import { TodosContext } from '../reducer/todos-context'
 
 const NewTodo = (props) => {
   const [inputValue, setInputValue] = useState('')

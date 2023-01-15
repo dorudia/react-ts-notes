@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react'
-import { TodosContext } from '../store/todos-context';
+import { TodosContext } from '../reducer/todos-context';
 import AddNotesModal from './AddNotesModal';
 import classes from './NotesList.module.css';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -13,7 +13,6 @@ const NotesList = () => {
 
   const showTabModalHandler = ()=> {
     setShowTabModal(!showTabModal);
-    // todosCtx.isModalOpenHandler(true)
   }
 
   const editableItemId = todosCtx.editableItemId
@@ -28,7 +27,7 @@ const NotesList = () => {
 
     setActiveItem(activeTab)
 
-    console.log(activeItem?.tabs);
+    // console.log(activeItem?.tabs);
 
     setItemTitle(() => {
       if(activeItem && activeItem.tabs ) {
