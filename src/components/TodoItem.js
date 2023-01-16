@@ -1,5 +1,5 @@
 import classes from './TodoItem.module.css'
-import { TodosContext } from '../store/todos-context'
+import { TodosContext } from '../reducer/todos-context'
 import { useContext, useState } from 'react'
 import Modal from '../layers/Modal'
 

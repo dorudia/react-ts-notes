@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react';
 import classes from './EditTodoForm.module.css';
-import { TodosContext } from '../store/todos-context';
+import { TodosContext } from '../reducer/todos-context';
 import Modal from '../layers/Modal';
 
 
