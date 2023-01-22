@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #bbbbbb;
 }
 
 * {
@@ -37,6 +38,7 @@ nav {
   width: 100%;
   min-height: 400px;
   background: #f7f5ef;
+  margin-bottom: 32px;
 }
 
 .tab-details {
@@ -58,5 +60,15 @@ nav {
   overflow: auto;
   resize: none;
   font-size: 18px;
+}
+
+@media only screen and (max-width: 800px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .contentWrapper {
+    width: 90%; 
+  }
 }
 
