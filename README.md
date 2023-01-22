@@ -1,2 +1,2 @@
 React-Hooks-Router... Notes.
-deployed
+deployed on https://react-notes-v2.vercel.app/
