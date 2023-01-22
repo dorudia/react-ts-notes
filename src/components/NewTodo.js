@@ -2,14 +2,14 @@ import React, { useContext } from 'react'
 import { useRef, useState } from 'react'
 import classes from './NewTodo.module.css'
 import { TodosContext } from '../reducer/todos-context'
+import { useNavigate } from 'react-router-dom'
 
 const NewTodo = (props) => {
   const [inputValue, setInputValue] = useState('')
   const [editInputValue, setEditInputValue] = useState('')
+  const navigate = useNavigate();
   
   const todosCtx = useContext(TodosContext);
-
-  const todoInputRef = useRef<HTMLInputElement>(null)
 
   const submitHandler = (e) => {
      e.preventDefault();
@@ -21,10 +21,9 @@ const NewTodo = (props) => {
 
      if(!todosCtx.isModalOpen) {
       todosCtx.addTodo(inputValue)
+      navigate(`/${inputValue}`)
       setInputValue('')
      }
-
-    
 
      if(todosCtx.isModalOpen) {
       console.log('Is Editable!!!');
@@ -32,7 +31,10 @@ const NewTodo = (props) => {
   }
 
   const onChangeHandler = (e) => {
-    setInputValue(e.target.value)
+    if(e.target.value.includes('/')) {
+      console.log('danger!!!');
+    }
+    setInputValue(e.target.value.replace('/', '-'))
   }
 
   const onChangeEditHandler = (e) => {
