@@ -11,8 +11,8 @@ const Todos= (props) => {
 
   useEffect(()=> {
     todosCtx.onSetEditableId(todosCtx.items[0]?.id)
+    // console.log(todosCtx.items);
   },[todosCtx.items])
-  
   
   
   return (

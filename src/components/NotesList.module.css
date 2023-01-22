@@ -46,11 +46,18 @@
   font-size: 18px;
 }
 
+.notesListContainer ul li a {
+  text-decoration: none;
+}
+
 .notesListContainer ul li:not(:first-of-type) {
   border-left: none;
 }
 
+.notesListContainer ul li:has(a.active),
 .notesListContainer ul li:hover {
-  background-color: blueviolet;
+  background-color: #bbbbbb;
   color: white;
 }
+
+

@@ -1,42 +1,32 @@
-import React, {useContext, useState} from 'react';
-import NewTodo from './components/NewTodo';
-import Todos from './components/Todos';
-import './App.css'
-import { TodosContext } from './reducer/todos-context';
-import ContentLayer from './layers/ContentLayer';
-import EditTodoForm from './components/EditTodoForm';
+import React from 'react';
 import NotesList from './components/NotesList';
-
-
-
-
-
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import RootLayout from './components/RootLayout';
+import TabDetails from './components/TabDetails';
 
 const App = () => {
-  const [showEditTodoModal, setShowEditTodoModal] = useState(false)
-
-  // const todosCtx = useContext(TodosContext);
   
-  const onSetShowEditTodoModal = () => {
-    setShowEditTodoModal(!showEditTodoModal);
-  }
-  
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <RootLayout />,
+      children: [
+        {
+          path: "/:todo",
+          element: <NotesList/>,
+        },
+        {
+          path: "/:todo/:item",
+          element: <TabDetails/>,
+        }
+      ]
+    }
+  ])
 
   return (
     <>
-      <nav>DoruDia Tasks</nav>
-      <ContentLayer>
-        <div className='grid-container'>
-          <div className='left-container'>
-            <NewTodo />
-            <Todos setEditTodoModal={onSetShowEditTodoModal}/>
-          </div>
-          <div className="right-container">
-             <NotesList/>
-          </div> 
-        </div>
-      </ContentLayer>
-      {showEditTodoModal && <EditTodoForm setEditTodoModal={onSetShowEditTodoModal}/>}
+    <RouterProvider router={router}/>
+      
     </>
   );
 }
