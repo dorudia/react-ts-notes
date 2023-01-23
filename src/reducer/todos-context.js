@@ -23,7 +23,7 @@ const TodosContextProvider = (props) => {
     const {todos, updateTodos, deleteNotesItem, addTodos, addNewTabs} = useDataFetch();
     const [isModalOpen, setisModalOpen] = useState(false);
     const [editableItemId, seteditableItemId] = useState('');
-    const [knowledgeTitle, setKnowledgeTitle] = useState("CSS");
+    const [knowledgeTitle, setKnowledgeTitle] = useState("");
   
     const isModalOpenHandler = (text) => {
       setisModalOpen(text)

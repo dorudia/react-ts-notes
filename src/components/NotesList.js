@@ -22,6 +22,15 @@ const NotesList = () => {
   }
 
   useEffect(() => {
+
+    console.log(todosCtx.items[0]?.title);
+    if(!params.todo && todosCtx.items || params.todo === 'undefined') {
+      navigate(`${todosCtx.items[0]?.title}`);
+    }
+
+ },[todosCtx.items, params.todo, navigate]);
+
+  useEffect(() => {
     
     const activeTab = todosCtx.items.find(el => el.title === params.todo);
     setActiveItem(activeTab)
@@ -62,7 +71,7 @@ const NotesList = () => {
   return ( <>
   <div className={classes.notesListContainer}>
     <h2>
-      {params.todo || "CSS"}
+      {params.todo}
       <span onClick={showTabModalHandler}>Add +</span>
     </h2>
     <ul>
