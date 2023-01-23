@@ -22,10 +22,13 @@ const NotesList = () => {
   }
 
   useEffect(() => {
-    if(!params.todo) {
-      navigate('/CSS')
+
+    console.log(todosCtx.items[0]?.title);
+    if(!params.todo && todosCtx.items || params.todo === 'undefined') {
+      navigate(`${todosCtx.items[0]?.title}`);
     }
- },[navigate]);
+
+ },[todosCtx.items, params.todo, navigate]);
 
   useEffect(() => {
     
