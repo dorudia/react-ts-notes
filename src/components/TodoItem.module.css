@@ -6,8 +6,8 @@
     align-items: center;
     justify-content: space-between;
     height: fit-content;
-    padding: 4px;
-    border-radius: 4px;
+    border-radius:6px;
+    border: 1px solid transparent;
   }
 
   .deleteItem {
@@ -29,6 +29,7 @@
 
   .icons {
     display: flex;
+    margin-right: 8px;
   }
 
   .item a {
@@ -40,6 +41,7 @@
   .item:has(a):hover,
   .item:has(.active) {
     background-color: #ccc;
+    border: 1px solid rgb(146, 146, 146);
   }
 
   .item:has(a):hover a,
