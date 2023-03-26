@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./components/RootLayout";
 import TabDetails from "./components/TabDetails";
 
-const App = () => {
+const App: React.FC = () => {
   const router = createBrowserRouter([
     {
       path: "/",
@@ -19,8 +19,8 @@ const App = () => {
           element: (
             <TabDetails
               defaultDescription={undefined}
-              myTabs={undefined}
               defaultTitle={undefined}
+              myTabs={undefined}
             />
           ),
         },
