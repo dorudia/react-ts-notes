@@ -14,7 +14,7 @@ const TabDetails: React.FC<{
   const [myDescription, setMyDescription] = useState<string>();
   const [itemTitle, setItemTitle] = useState<string>("");
   const params = useParams() as any;
-  console.log(params.todo);
+  // console.log(params.todo);
 
   useEffect(() => {
     setMyDescription(() => {
@@ -30,13 +30,13 @@ const TabDetails: React.FC<{
   useEffect(() => {
     setItemTitle(params.item);
 
-    console.log(props.myTabs);
+    // console.log(props.myTabs);
 
     if (!params.item) {
       if (props.myTabs === undefined) {
-        console.log("undefined-Tabs");
+        // console.log("undefined-Tabs");
       } else {
-        console.log(props.myTabs[0]?.itemtext);
+        // console.log(props.myTabs[0]?.itemtext);
         setMyDescription(props.myTabs[0]?.itemtext);
       }
     } else {

@@ -32,17 +32,17 @@ const NotesList: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log(todosCtx?.items[0]?.title);
+    // console.log(todosCtx?.items[0]?.title);
     if ((!params.todo && todosCtx.items) || params.todo === "undefined") {
       navigate(`${todosCtx.items[0]?.title}`);
     }
-    console.log(todosCtx.items);
+    // console.log(todosCtx.items);
   }, [todosCtx.items, params.todo, navigate]);
 
   useEffect(() => {
     const activeTab = todosCtx.items.find((el) => el.title === params.todo);
     setActiveItem(activeTab);
-    console.log(activeTab?.tabs);
+    // console.log(activeTab?.tabs);
     setTabs(activeTab?.tabs);
 
     setItemTitle(() => {
@@ -57,7 +57,7 @@ const NotesList: React.FC = () => {
         : "No Tabs Found!";
     });
 
-    console.log(params.todo);
+    // console.log(params.todo);
     if (!params.todo) {
       setActiveItem(todosCtx.items[0]);
       setItemTitle(todosCtx.items[0]?.tabs[0].itemName);
@@ -67,7 +67,7 @@ const NotesList: React.FC = () => {
   }, [todosCtx.items, params]);
 
   const handleTabClick = (id: string) => {
-    console.log(id);
+    // console.log(id);
     const description = activeItem?.tabs.find((el) => el.id === id)?.itemText;
     const itemTitle = activeItem?.tabs.find((el) => el.id === id)?.itemName;
     setMyDescription(description);

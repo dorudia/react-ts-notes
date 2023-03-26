@@ -1,14 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-
-interface ItemType {
-  id: string;
-  title: string;
-  tabs: {
-    id: string;
-    itemName: string;
-    itemText?: string;
-  }[];
-}
+import { ItemType } from "../types/types";
 
 const useDataFetch = () => {
   const [todos, setTodos] = useState<ItemType[]>([]);
@@ -50,7 +41,7 @@ const useDataFetch = () => {
 
     setTodos(transformedData);
 
-    console.log(todos);
+    // console.log(todos);
   };
 
   useEffect(() => {
@@ -59,7 +50,7 @@ const useDataFetch = () => {
     } catch (error) {
       console.log(error);
     } finally {
-      console.log(todos);
+      // console.log(todos);
     }
   }, []);
 
@@ -87,7 +78,7 @@ const useDataFetch = () => {
         console.log(error);
       });
 
-    console.log("deletted!!!!!");
+    // console.log("deletted!!!!!");
   };
 
   function addTodos(text: string) {

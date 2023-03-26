@@ -16,7 +16,7 @@ const NewTodo = () => {
   const todosCtx = useContext(TodosContext) as CtxType;
 
   React.useEffect(() => {
-    console.log(todosCtx.items.map((el) => el.title));
+    // console.log(todosCtx.items.map((el) => el.title));
     setTodosList(todosCtx.items.map((el) => el.title));
   }, [todosCtx.items]);
 
