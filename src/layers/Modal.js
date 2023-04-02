@@ -1,27 +1,28 @@
-import React, {useContext} from 'react';
-import classes from './Modal.module.css'
-import { TodosContext } from '../reducer/todos-context';
+import React, { ReactNode, useContext } from "react";
+import classes from "./Modal.module.css";
+import { TodosContext } from "../reducer/todos-context";
+import { BoxProps } from "../types/types";
 
 const Modal = (props) => {
   // const notesCtx = useContext(TodosContext)
 
   const clickWrapperHandler = () => {
-    if( props.showEditTodoModal) {
+    if (props.showEditTodoModal) {
       props.showEditTodoModal();
     }
-    
-    if(props.setShowTabModal) {
+
+    if (props.setShowTabModal) {
       props.setShowTabModal();
     }
-  }
+  };
 
   return (
-    <div className={classes.modalWrapper} onClick={clickWrapperHandler} >
+    <div className={classes.modalWrapper} onClick={clickWrapperHandler}>
       <div className={classes.modal} onClick={(e) => e.stopPropagation()}>
         {props.children}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Modal;

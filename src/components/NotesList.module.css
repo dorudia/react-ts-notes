@@ -1,4 +1,4 @@
-.notesListContainer  h2 {
+.notesListContainer h2 {
   text-align: center;
   background: rgb(38, 4, 66);
   color: white;
@@ -26,9 +26,9 @@
 }
 
 .notesListContainer h2 span:hover {
- background: wheat;
- color: black;
- font-weight: 700;
+  background: wheat;
+  color: black;
+  font-weight: 700;
 }
 
 .notesListContainer ul {
@@ -41,13 +41,18 @@
 
 .notesListContainer ul li {
   border: 1px solid rgb(178, 178, 178);
-  padding: 4px 8px;
   cursor: pointer;
   font-size: 18px;
 }
 
+.notesListContainer ul li:hover {
+  outline: 2px solid #ddd;
+  outline-offset: -3px;
+}
+
 .notesListContainer ul li a {
   text-decoration: none;
+  padding: 4px 8px;
 }
 
 .notesListContainer ul li:not(:first-of-type) {
@@ -59,5 +64,3 @@
   background-color: #bbbbbb;
   color: white;
 }
-
-
