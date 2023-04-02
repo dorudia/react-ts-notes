@@ -60,9 +60,9 @@ const NewTodo = () => {
   let editableTitle;
 
   if (todosCtx.isModalOpen) {
-    editableTitle = todosCtx.items.filter(
+    editableTitle = todosCtx.items?.filter(
       (el) => el.id === todosCtx.editableItemId
-    )[0].title;
+    )[0]?.title;
 
     console.log(editableTitle);
 

@@ -27,6 +27,7 @@ const TodoItem: React.FC<{
   const clickHandler = () => {
     todosCtx.setKnowledgeTitle(props.title);
     todosCtx.onSetEditableId(props.id);
+    console.log("li clicked");
   };
 
   return (

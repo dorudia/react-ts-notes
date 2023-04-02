@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NotesList from "./components/NotesList";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./components/RootLayout";

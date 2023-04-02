@@ -5,16 +5,7 @@ import classes from "./NotesList.module.css";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import TabDetails from "./TabDetails";
 import { TabType, CtxType } from "../types/types";
-
-interface ItemType {
-  id: string;
-  title: string;
-  tabs: {
-    id: string;
-    itemName: string;
-    itemText?: string;
-  }[];
-}
+import { ItemType } from "../types/types";
 
 const NotesList: React.FC = () => {
   const [activeItem, setActiveItem] = useState<ItemType>();
@@ -36,13 +27,18 @@ const NotesList: React.FC = () => {
     if ((!params.todo && todosCtx.items) || params.todo === "undefined") {
       navigate(`${todosCtx.items[0]?.title}`);
     }
+
+    todosCtx.onSetEditableId(
+      todosCtx.items?.filter((el) => el.title === params.todo)[0]?.id
+    );
+
+    // console.log(params.todo);
     // console.log(todosCtx.items);
   }, [todosCtx.items, params.todo, navigate]);
 
   useEffect(() => {
     const activeTab = todosCtx.items.find((el) => el.title === params.todo);
     setActiveItem(activeTab);
-    // console.log(activeTab?.tabs);
     setTabs(activeTab?.tabs);
 
     setItemTitle(() => {
@@ -67,11 +63,11 @@ const NotesList: React.FC = () => {
   }, [todosCtx.items, params]);
 
   const handleTabClick = (id: string) => {
-    // console.log(id);
     const description = activeItem?.tabs.find((el) => el.id === id)?.itemText;
     const itemTitle = activeItem?.tabs.find((el) => el.id === id)?.itemName;
     setMyDescription(description);
     setItemTitle(itemTitle);
+    // console.log("tab clicked");
   };
 
   return (
@@ -83,7 +79,13 @@ const NotesList: React.FC = () => {
         </h2>
         <ul>
           {tabs?.map((el) => (
-            <li key={el.id} onClick={() => handleTabClick(el.id)}>
+            <li
+              className="tab-item"
+              key={el.id}
+              onClick={() => {
+                handleTabClick(el.id);
+              }}
+            >
               <NavLink
                 to={`/${params.todo}/${el.itemName.replace("/", "-")}`}
                 className={({ isActive }) =>
